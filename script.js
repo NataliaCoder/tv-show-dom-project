@@ -2,8 +2,23 @@
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
-}
+ 
+let updateInput = document.querySelector('#input_id');
+updateInput.addEventListener('input', function() {
+let title = updateInput.value;          //what we entered in input
+let titleElement = document.querySelector('.results'); //where we want to see number result
 
+let result = allEpisodes.filter( episode =>  ( 
+  episode.name.toLowerCase().includes(title) || 
+  episode.summary.toLowerCase().includes(title) 
+ ) 
+);
+let mainResult= result.length;
+ 
+titleElement.innerText = "Episodes found " + mainResult + " / " + allEpisodes.length;
+updateInput.value = title;  
+});
+}
 
 let inputTitle = document.querySelector("#input_title")
 let input = document.createElement("input");
@@ -14,14 +29,9 @@ results.className = "results";
 input.className = "input";
 input.id = "input_id"
 // ///////
-// let allEpisodes = getAllEpisodes();
-// allEpisodes.filter(myFunction2);
-// function myFunction2(){
-//   let str = episodeList[i].name; // + episodeList[i].summary;
-// let n = str.includes(title);
-//   results.innerHTML = n;
-// }
-// ///////
+
+
+
 // let updateInput = document.querySelector('#input_id');
 // updateInput.addEventListener('click', function() {
 //   let title = updateInput.value;          //what we entered in input
@@ -29,12 +39,6 @@ input.id = "input_id"
 //     // titleElement.innerText = title;
 //     // updateInput.value = title;
 // });
-
-
-//   let str = episodeList[0].name;
-// console.log(str.includes("Winter"));
-// console.log(str.includes("Autumn"));
-
 
 
 
