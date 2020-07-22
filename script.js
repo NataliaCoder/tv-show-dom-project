@@ -1,4 +1,5 @@
 /**
+  
   <a href="http://.... " target="_blank">Name</a> 
   window.redirect
  */
@@ -54,19 +55,19 @@ function setup() {
  
   let updateInput = document.querySelector('#input_id');
   updateInput.addEventListener('input', function() {
-    let title = updateInput.value;          //what we entered in input
+    let searchLine = updateInput.value.toLowerCase();          //what we entered in input
     let titleElement = document.querySelector('.results'); //where we want to see number result
 
     let result = allEpisodes.filter( episode => ( 
       
-        episode.name.toLowerCase().includes(title) || 
-        episode.summary.toLowerCase().includes(title) 
+        episode.name.toLowerCase().includes(searchLine) || 
+        episode.summary.toLowerCase().includes(searchLine) 
       ) 
     );
     let mainResult= result.length;
     
     titleElement.innerText = "Episodes found " + mainResult + " / " + allEpisodes.length;
-    updateInput.value = title;  
+    updateInput.value = searchLine;  
     makePageForEpisodes(result);
   });
 
@@ -119,7 +120,9 @@ function makePageForEpisodes(episodeList) {
     par.textContent = episodeList[i].summary;
     par.className = "summary";
 
-
+    /// -----
+    let link = document.createElement("a");
+    link.href = episodeList[i].url;
 
   }
 }
