@@ -27,8 +27,14 @@ function setup() {
         selectSearch.appendChild(option);
 
     });
-   
-  
+   //////
+  episode_search.onchange= function(){
+    return episodeList.find(episode => {
+      if (episode.id == episode_search.value){
+        window.open(episode.url);
+      }
+    })
+  }
     // selectSearch.onchange= function(){
     //   return episodeList.find(episode => {
     //       if(episode.id == selectSearch.value){
@@ -36,7 +42,7 @@ function setup() {
     //       }
     //     });
     //   };
-   
+   // by the way ---let selection =document.getElementById("select");
     // input for word-search
     let input = document.createElement("input");
     let results = document.createElement("div"); 
@@ -45,23 +51,17 @@ function setup() {
     results.className = "results";
     input.className = "input";
     input.id = "input_id";
-
-
-  
-
-
-
   makePageForEpisodes(allEpisodes);
  
   let updateInput = document.querySelector('#input_id');
   updateInput.addEventListener('input', function() {
-    let searchLine = updateInput.value.toLowerCase();          //what we entered in input
+    let searchLine = updateInput.value;      //what we entered in input
     let titleElement = document.querySelector('.results'); //where we want to see number result
 
     let result = allEpisodes.filter( episode => ( 
       
-        episode.name.toLowerCase().includes(searchLine) || 
-        episode.summary.toLowerCase().includes(searchLine) 
+        episode.name.toLowerCase().includes(searchLine.toLowerCase()) || 
+        episode.summary.toLowerCase().includes(searchLine.toLowerCase()) 
       ) 
     );
     let mainResult= result.length;
