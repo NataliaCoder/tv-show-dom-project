@@ -1,8 +1,3 @@
-/**
-  <a href="http://.... " target="_blank">Name</a> 
-  window.redirect
- */
-
 function setup() {
   const allEpisodes = getAllEpisodes();
   let inputTitle = document.querySelector("#input_title");
@@ -12,18 +7,41 @@ function setup() {
   selectSearch.name = "episode_search";
   selectSearch.id = "episode_search";
   
- 
-  allEpisodes.forEach((episode, idx) => {  
-      option = document.createElement('option');
-      option.setAttribute('value', idx);
+
+  allEpisodes.forEach((episode) => {  
+      let option = document.createElement('option');
+      option.setAttribute("value", episode.id); 
       option.appendChild(document.createTextNode(
           "S".concat(String(episode.season).padStart(2, 0)) +
           "E".concat(String(episode.number).padStart(2, 0)) +
           " - ".concat(episode.name)
       ));
       selectSearch.appendChild(option);
-
   });
+      selectSearch.onchange = function(){
+        allEpisodes.find(function(episode) {
+              if(episode.id == selectSearch.value){
+                window.open(episode.url);
+                return true;
+              }
+              return false;
+            });
+      };
+
+  // allEpisodes.forEach((episode, idx) => {
+  //   let option = document.createElement('option');
+  //   option.setAttribute("value", idx); 
+  //   option.appendChild(document.createTextNode(
+  //       "S".concat(String(episode.season).padStart(2, 0)) +
+  //       "E".concat(String(episode.number).padStart(2, 0)) +
+  //       " - ".concat(episode.name)
+  //   ));
+  //   selectSearch.appendChild(option);
+  // });
+
+  // selectSearch.onchange = function() {
+  //   window.open(allEpisodes[selectSearch.value].url);
+  // };
 
  // input for word-search
  let input = document.createElement("input");
